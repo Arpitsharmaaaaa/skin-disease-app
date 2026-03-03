@@ -23,7 +23,7 @@ with open("class_indices.json", "r") as f:
     class_indices = json.load(f)
 
 class_names = list(class_indices.keys())
-
+# Full disease names
 # Image preprocessing
 def preprocess_image(image):
     image = image.resize((224, 224))
@@ -39,12 +39,22 @@ if uploaded_file is not None:
 
     processed_image = preprocess_image(image)
     prediction = model.predict(processed_image)
-
+    
+    CLASS_NAMES = {
+        "akiec": "Actinic Keratoses",
+        "bcc": "Basal Cell Carcinoma",
+        "bkl": "Benign Keratosis",
+        "df": "Dermatofibroma",
+        "mel": "Melanoma",
+        "nv": "Melanocytic Nevus (Mole)",
+        "vasc": "Vascular Lesion"
+    }
     predicted_class = class_names[np.argmax(prediction)]
     confidence = np.max(prediction) * 100
+    full_name = CLASS_NAMES[predicted_class]
 
     st.subheader("Prediction:")
-    st.success(f"{predicted_class} ({confidence:.2f}% confidence)")
+    st.success(f"{full_name} ({confidence:.2f}% confidence)")
 
     st.markdown("---")
     st.warning("⚠ This tool is for educational purposes only. Not a medical diagnosis.")
