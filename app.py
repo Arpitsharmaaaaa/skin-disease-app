@@ -9,11 +9,18 @@ st.set_page_config(page_title="Skin Disease Classifier", layout="centered")
 
 st.title("🩺 AI Skin Disease Classifier")
 st.write("Upload a dermoscopic image to predict the skin condition.")
+import gdown
+import os
 
+MODEL_PATH = "skin_model_finetuned.keras"
+
+if not os.path.exists(MODEL_PATH):
+    url = "https://drive.google.com/uc?id=1LV3a-sx5qFDUmVf1hXARVdXSkByxn-yd"
+    gdown.download(url, MODEL_PATH, quiet=False)
 # Load model
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("mobilenetv2_skin_model.keras")
+    model = tf.keras.models.load_model("MODEL_PATH")
     return model
 
 model = load_model()
