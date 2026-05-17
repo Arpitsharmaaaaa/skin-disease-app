@@ -20,9 +20,8 @@ if not os.path.exists(MODEL_PATH):
 # Load model
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("MODEL_PATH")
+    model = tf.keras.models.load_model(MODEL_PATH)
     return model
-
 model = load_model()
 
 # Load class mapping
