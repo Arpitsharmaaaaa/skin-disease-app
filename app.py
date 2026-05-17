@@ -9,14 +9,6 @@ st.set_page_config(page_title="Skin Disease Classifier", layout="centered")
 
 st.title("🩺 AI Skin Disease Classifier")
 st.write("Upload a dermoscopic image to predict the skin condition.")
-
-'''# Load model
-@st.cache_resource
-def load_model():
-    MODEL_PATH = "mobilenetv2_skin_model"
-    model = tf.keras.models.load_model(MODEL_PATH)
-    return model
-model = load_model()'''
 import tensorflow as tf
 import streamlit as st
 
